@@ -24,3 +24,17 @@ class LowercaseValidator(object):
 
     def get_help_text(self):
         return "Your password must contain at least 1 lowercase letter, a-z."
+
+
+class SymbolValidator(object):  # new
+    def validate(self, password, user=None):  # new
+        if not re.findall("[()[\]{}|\\`~!@#$%^&*_\-+=;:'\",<>./?]", password):
+            raise ValidationError(  # new
+                (
+                    "The password must contain at least 1 symbol"
+                ),
+                code="password_no_symbol",  # new
+            )
+
+    def get_help_text(self):  # new
+        return "Your password must contain at least 1 symbol"
