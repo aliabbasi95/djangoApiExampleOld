@@ -38,3 +38,17 @@ class SymbolValidator(object):  # new
 
     def get_help_text(self):  # new
         return "Your password must contain at least 1 symbol"
+
+
+class HasNumberValidator(object):
+    def validate(self, password, user=None):
+        if not re.findall("\d", password):
+            raise ValidationError(
+                (
+                    "The password must contain at least 1 number"
+                ),
+                code="password_no_symbol",
+            )
+
+    def get_help_text(self):
+        return "Your password must contain at least 1 number: " + "1234567890"
